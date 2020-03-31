@@ -4,6 +4,7 @@
 
 #include "debug_str.h"
 #include "gtpv2c.h"
+#include "cp_app.h"
 
 const char *
 cause_str(enum cause_value cause)
@@ -202,6 +203,24 @@ gtp_type_str(uint8_t type)
 		return "GTP_MBMS_SESSION_STOP_RSP";
 	case GTP_MSG_END:
 		return "GTP_MSG_END";
+	default:
+		return "UNKNOWN";
+	}
+}
+
+const char *
+gx_type_str(uint8_t type)
+{
+	/* GX Message Type Values */
+	switch (type) {
+	case GX_CCR_MSG:
+		return "GX_CCR_MSG";
+	case GX_CCA_MSG:
+		return "GX_CCA_MSG";
+	case GX_RAR_MSG:
+		return "GX_RAR_MSG";
+	case GX_RAA_MSG:
+		return "GX_RAA_MSG";
 	default:
 		return "UNKNOWN";
 	}

@@ -2,19 +2,13 @@
  * Copyright(c) 2017 Intel Corporation
  */
 
-#include <errno.h>
-#include <inttypes.h>
-#include <unistd.h>
-
-#include <rte_malloc.h>
-#include <rte_lcore.h>
 #include <rte_acl.h>
 #include <rte_cfgfile.h>
 
-#include "packet_filters.h"
-#include "vepc_cp_dp_api.h"
 #include "ue.h"
 #include "util.h"
+#include "packet_filters.h"
+#include "vepc_cp_dp_api.h"
 #ifdef SDN_ODL_BUILD
 #include "nb.h"
 #endif
@@ -474,6 +468,7 @@ init_sdf_rules(void)
 					rte_strerror(rte_errno), __FILE__, __LINE__);
 		}
 	}
+	num_sdf_filters = FIRST_FILTER_ID; /*Reset num_sdf_filters*/
 }
 
 static void
@@ -642,6 +637,7 @@ init_pcc_rules(void)
 		}
 
 	}
+	num_pcc_filter = FIRST_FILTER_ID; /*Reset num_pcc_filter*/
 }
 
 void
@@ -649,11 +645,6 @@ init_packet_filters(void)
 {
 	/* init pcc rule tables on dp*/
 	init_pcc_rules();
-	/*TODO: As workaround adding sleep before pushing SDF rules. Otherwise
-	 * those are not processed on DP.
-	 * Need to debug and fix.
-	 **/
-	sleep(1);
 
 	/* init dpn meter profile table before configuring pcc/adc rules*/
 	init_mtr_profile();

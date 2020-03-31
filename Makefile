@@ -2,12 +2,7 @@
 # Copyright 2019-present Open Networking Foundation
 # Copyright(c) 2017 Intel Corporation
 
-RECURSIVETARGETS := all clean
-CPDEPS := libgtpv2c
-DPDEPS := lib
-DIRS := cp dp test
-# Use 'make WHAT=cp' to compile cp only
-WHAT ?= $(DIRS)
+DIRS-y =  lib libgtpv2c libpfcp cp dp test
 
 $(RECURSIVETARGETS): $(WHAT)
 $(CPDEPS) $(DPDEPS):

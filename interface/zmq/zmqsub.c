@@ -12,7 +12,7 @@
 
 #include "zmqsub.h"
 #include "zmqpub.h"
-#include "main.h"
+#include "up_main.h"
 
 static void *zmqsub_sockctxt;
 static void *zmqsub_socket;
